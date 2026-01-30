@@ -28,10 +28,10 @@ app.component('product-display', {
                 :style="{ backgroundColor: varient.color }"
             ></div>
             <button 
-            class="button"
+                class="button"
                 :class="{ disabledButton: !inStock }"
                 :disabled="!inStock"
-                @click="addToCart"
+                v-on:click="addToCart"
             >Add to Cart</button>
         </div>
     </div>`,
@@ -49,7 +49,7 @@ app.component('product-display', {
     },
     methods: {
         addToCart() {
-            this.cart += 1;
+            this.$emit('add-to-cart', this.varients[this.selectedVarient].id);
         },
         updateVarient(index) {
             this.selectedVarient = index;
