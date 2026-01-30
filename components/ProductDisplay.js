@@ -8,7 +8,7 @@ app.component('product-display', {
     template:
     /*html*/
     `<div class="product-display">
-        <div class="product-container">
+        <div class="product-container"> 
         <div class="product-image">
             <img v-bind:src="image" />
         </div>
@@ -34,6 +34,9 @@ app.component('product-display', {
                 v-on:click="addToCart"
             >Add to Cart</button>
         </div>
+        
+        <review-list v-if="reviews.length" :reviews="reviews"></review-list>
+        <review-form @review-submitted="addReview"></review-form>
     </div>`,
     data() {
         return {
@@ -44,7 +47,8 @@ app.component('product-display', {
             varients: [
                 { id: 2234, color: 'green', image: './assets/images/socks_green.jpg', quantity: 50 },
                 { id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 0 },
-            ]
+            ],
+            reviews: []
         }
     },
     methods: {
@@ -54,6 +58,9 @@ app.component('product-display', {
         updateVarient(index) {
             this.selectedVarient = index;
             console.log(index);
+        },
+        addReview(review) {
+            this.reviews.push(review);
         }
     },
     computed: {
